@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAS Pemrograman 1 - Erfina Wulandari</title>
+    <style>
+        /* CSS - TEMA JERAPAH & KUNING */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #fffef2;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Dashboard */
+        .sidebar {
+            width: 300px;
+            background-color: #FFD700;
+            background-image: url('https://www.transparenttextures.com/patterns/animal-prints.png'); 
+            height: 100vh;
+            position: fixed;
+            padding: 20px;
+            box-shadow: 5px 0px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 { color: #b8860b; font-size: 1.2rem; }
+
+        .menu-list {
+            list-style: none;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .menu-list li { margin-bottom: 8px; }
+
+        .menu-list a {
+            text-decoration: none;
+            color: #444;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.4);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-list a:hover, .menu-list a.active {
+            background: #333;
+            color: #FFD700;
+        }
+
+        .dev-info {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* Konten Utama */
+        .main-content {
+            margin-left: 300px;
+            padding: 40px;
+            width: 100%;
+        }
+
+        .article-card {
+            background: white;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+
+        h1 { color: #b8860b; border-bottom: 3px solid #FFD700; display: inline-block; margin-bottom: 20px; padding-bottom: 5px; }
+        h3 { color: #333; margin: 25px 0 10px 0; border-left: 4px solid #FFD700; padding-left: 10px; }
+        p { line-height: 1.7; color: #555; margin-bottom: 15px; }
+        ul { margin-left: 20px; margin-bottom: 15px; color: #555; }
+        li { margin-bottom: 5px; }
+
+        /* Tombol Link Modul */
+        .modul-btn {
+            display: inline-block;
+            background-color: #FFD700;
+            color: #333;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 10px 0 25px 0;
+            transition: 0.3s;
+        }
+
+        .modul-btn:hover { background-color: #333; color: #FFD700; }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .main-content { margin-left: 0; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>🦒 E-Learning</h2>
+            <small>Programming 1</small>
+        </div>
+        <ul class="menu-list">
+            <li><a onclick="loadMateri('home')" id="defaultOpen">🏠 Home</a></li>
+            <li><a onclick="loadMateri('p1')">📌 Meeting 1</a></li>
+            <li><a onclick="loadMateri('p2')">📌 Meeting 2</a></li>
+            <li><a onclick="loadMateri('p3')">📌 Meeting 3</a></li>
+            <li><a onclick="loadMateri('p4')">📌 Meeting 4</a></li>
+            <li><a onclick="loadMateri('p5')">📌 Meeting 5</a></li>
+            <li><a onclick="loadMateri('p6')">📌 Meeting 6</a></li>
+            <li><a onclick="loadMateri('p7')">📌 Meeting 7</a></li>
+        </ul>
+        <div class="dev-info">
+            Developed by:<br>
+            <strong>ERFINA WULANDARI</strong>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div id="content-area" class="article-card"></div>
+    </main>
+
+    <script>
+        const dataMateri = {
+            home: `
+                <h1>Welcome to Programming 1</h1>
+                <p>Hello! I am <strong>Erfina Wulandari</strong>. This website is a static learning media designed to help you understand the core concepts of programming.</p>
+                <p>Explore each meeting from the sidebar to learn step-by-step from logic to functions.</p>
+                <div style="text-align:center; font-size: 4rem; margin-top:20px;">🦒</div>
+            `,
+            p1: `
+                <h1>Meeting 1: Algorithms</h1>
+                <p>Introduction to computational thinking and logical steps to solve problems.</p>
+                <a href="https://www.google.com/search?q=introduction+to+algorithms+basic" target="_blank" class="modul-btn">🚀 Access Module</a>
+                <h3>Key Concepts:</h3>
+                <ul>
+                    <li>Definition: A set of step-by-step instructions.</li>
+                    <li>Flowcharts: Visual representation of an algorithm.</li>
+                    <li>Pseudocode: Writing logic in a human-friendly format.</li>
+                </ul>
+                <div class="code-block">// Example Pseudocode<br>START<br>  INPUT number1, number2<br>  SET result = number1 + number2<br>  OUTPUT result<br>END</div>
+            `,
+            p2: `
+                <h1>Meeting 2: Variables</h1>
+                <p>Learn how to store and manage data in computer memory.</p>
+                <a href="https://www.google.com/search?q=programming+variables+explained" target="_blank" class="modul-btn">🚀 Access Module</a>
+                <h3>Key Concepts:</h3>
+                <ul>
+                    <li>Declaration: Creating a variable name.</li>
+                    <li>Assignment: Giving a value to the variable.</li>
+                    <li>Naming Rules: Must be unique and cannot start with numbers.</li>
+                </ul>
+                <div class="code-block">let name = "Erfina";<br>const age = 20;</div>
+            `,
+            p3: `
+                <h1>Meeting 3: Data Types</h1>
+                <p>Understanding the different types of data used in programming.</p>
+                <a href="https://www.google.com/search?q=basic+data+types+programming" target="_blank" class="modul-btn">🚀 Access Module</a>
+                <h3>Key Concepts:</h3>
+                <ul>
+                    <li><strong>String:</strong> Text data like "Hello".</li>
+                    <li><strong>Integer:</strong> Whole numbers like 10.</li>
+                    <li><strong>Boolean:</strong> Logical values (True or False).</li>
+                </ul>
+            `,
+            p4: `
+                <h1>Meeting 4: Operators</h1>
+                <p>Using symbols to perform calculations and logic comparisons.</p>
+                <a href="https://www.google.com/search?q=programming+operators+list" target="_blank" class="modul-btn">🚀 Access Module</a>
+                <h3>Types of Operators:</h3>
+                <ul>
+                    <li>Arithmetic: +, -, *, /, %</li>
+                    <li>Comparison: ==, !=, >, <</li>
+                    <li>Logical: AND (&&), OR (||), NOT (!)</li>
+                </ul>
+            `,
+            p5: `
+                <h1>Meeting 5: Conditional Logic</h1>
+                <p>Making decisions in code based on specific conditions.</p>
+                <a href="https://www.google.com/search?q=if+else+conditional+programming" target="_blank" class="modul-btn">🚀 Access Module</a>
+                <div class="code-block">if (score >= 75) {<br>&nbsp;&nbsp;console.log("Pass");<br>} else {<br>&nbsp;&nbsp;console.log("Fail");<br>}</div>
+            `,
+            p6: `
+                <h1>Meeting 6: Looping</h1>
+                <p>Repeating a block of code efficiently multiple times.</p>
+                <a href="https://www.google.com/search?q=for+while+looping+programming" target="_blank" class="modul-btn">🚀 Access Module</a>
+                <h3>Loop Types:</h3>
+                <ul>
+                    <li><strong>For Loop:</strong> Used for known number of iterations.</li>
+                    <li><strong>While Loop:</strong> Continues as long as condition is true.</li>
+                </ul>
+            `,
+            p7: `
+                <h1>Meeting 7: Functions</h1>
+                <p>Wrapping code into reusable modules for better structure.</p>
+                <a href="https://www.google.com/search?q=functions+in+programming+basics" target="_blank" class="modul-btn">🚀 Access Module</a>
+                <h3>Key Concepts:</h3>
+                <ul>
+                    <li>Definition: Named blocks of code.</li>
+                    <li>Parameters: Inputs passed into a function.</li>
+                    <li>Return: The result sent back by the function.</li>
+                </ul>
+                <div class="code-block">function greet(name) {<br>&nbsp;&nbsp;return "Hello, " + name;<br>}</div>
+            `
+        };
+
+        function loadMateri(id) {
+            const contentArea = document.getElementById('content-area');
+            contentArea.innerHTML = dataMateri[id];
+
+            const links = document.querySelectorAll('.menu-list a');
+            links.forEach(link => link.classList.remove('active'));
+            
+            if (event) event.currentTarget.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        document.getElementById('defaultOpen').click();
+    </script>
+</body>
+</html>
